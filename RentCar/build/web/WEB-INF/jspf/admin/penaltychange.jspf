@@ -1,0 +1,43 @@
+<%@ page pageEncoding="UTF-8" %>
+<p><fmt:message key="penalty.change.header"/></p>
+<form action="controller" method="post">
+    <input type="hidden" name="command" value="penaltychange">
+    <input type="hidden" name="penaltyId" value="${penaltyChange.penaltyId}">
+    <table class="ordertable">
+        <tr>
+            <td align="left">
+        <fmt:message key="penalty.order"/>
+        </td>
+        <td align="left">
+            <input type="text" name="penaltyId" disabled="" value="${penaltyChange.penaltyId}">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="penalty.message"/>
+        </td>
+        <td align="left">
+            <textarea name="penaltyMessage" cols="50" rows="2" wrap="soft">${penaltyChange.message}</textarea>
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="penalty.sum"/>
+        </td>
+        <td align="left">
+            <input type="text" name="sum" value="${penaltyChange.sum}" pattern="[0-9]{2,6}$">
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+
+                <input class="submit_button" type="submit" value="<fmt:message key="button.change" />" name="change_button" />
+
+            </td>
+        </tr>
+    </table>
+</form>
+<c:if test="${not empty penaltyUpdateFailed}">
+    <fmt:message key="penalty.update.failed"/>
+</c:if>

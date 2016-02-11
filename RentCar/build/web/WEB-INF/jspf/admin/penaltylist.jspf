@@ -1,0 +1,54 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<c:if test="${not empty penaltyGetError}">
+    <fmt:message key="penalty.get.error"/>
+</c:if>
+
+<c:forEach var="penalty" items="${adminStatusPenList}">
+    <table class="ordertable">
+        <thead>
+            <tr>
+                <th style="border-bottom: 1px solid activeborder;"><fmt:message key="penalty.id"/></th>
+        <th style="border-bottom: 1px solid activeborder;">${penalty.penaltyId}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width: 150px;"><b><i><fmt:message key="penalty.order"/></i></b></td>
+                <td style="border-bottom: 1px solid activeborder;">${penalty.orderId}</td>
+            </tr>
+            <tr>
+                <td><b><i><fmt:message key="penalty.message"/></i></b></td>
+                <td style="border-bottom: 1px solid activeborder;">${penalty.message}</td>
+            </tr>
+            <tr>
+                <td><b><i><fmt:message key="penalty.sum"/></i></b></td>
+                <td style="border-bottom: 1px solid activeborder;">${penalty.sum}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <c:choose>
+        <c:when test="${penalty.isPayed==true}">
+            <table class="conttable">
+                <tr>
+                    <td><b><i><fmt:message key="penalty.admin.payed"/></i></b></td>
+
+                </tr>
+            </table>
+        </c:when>
+        <c:when test="${penalty.isPayed==false}">
+            <form class="userUnBlock" action="controller" method="POST">
+                <div class="register">
+                    <input type="hidden" name="command" value="changepenalty" />
+                    <input type="hidden" name="userId" value="${penalty.penaltyId}">
+                    <button type="submit"><fmt:message key="button.change" /></button>
+                </div>
+            </form>
+        </c:when>
+        <c:otherwise>
+
+        </c:otherwise>
+    </c:choose>
+    </br>
+</c:forEach>

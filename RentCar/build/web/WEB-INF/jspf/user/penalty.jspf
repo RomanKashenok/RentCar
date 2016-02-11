@@ -1,0 +1,72 @@
+<%@ page pageEncoding="UTF-8" %>
+<table class="conttable">
+    <thead>
+        <tr>
+            <th><fmt:message key="penalty.id"/></th>
+<th>${penalty.penaltyId}</th>
+</tr>
+</thead>
+<tbody class="conttable">
+    <tr>
+        <td style="width: 150px;"><b><i><fmt:message key="penalty.order"/></i></b></td>
+        <td>${penalty.orderId}</td>
+    </tr>
+    <tr>
+        <td><b><i><fmt:message key="penalty.message"/></i></b></td>
+        <td>${penalty.message}</td>
+    </tr>
+    <tr>
+        <td><b><i><fmt:message key="penalty.sum"/></i></b></td>
+        <td>${penalty.sum}</td>
+    </tr>
+    <tr style="border: 1px solid;">
+
+    </tr>
+</tbody>
+</table>
+<table>
+    <tr>
+        <td>
+    <c:if test="${not empty penalty}">
+        <input type="text" name="sum" value="${penalty.sum}" size="6" disabled="" style="margin: 5px;">
+    </c:if>
+</td>
+<td>
+
+</td>
+<td>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="penaltypay" />
+        <input class="refill_button" type="submit" value="<fmt:message key="button.pay" />" />
+    </form></td>
+</tr>
+<tr>
+    <td>
+<c:if test="${not empty balanceDeficit}">
+    <fmt:message key="user.balance.daficit"/>
+</c:if>
+</td>
+</tr>
+</table>
+
+<table class="ordertable" style="align: center; width: 50%">
+    <tr>
+        <td>
+    <fmt:message key="user.balance"/>
+</td>
+<td>
+<c:if test="${not empty penalty}">
+    <input type="text" name="date" value="${userBalance}" size="6" disabled="" style="margin: 5px;">
+</c:if>
+</td>
+<td>
+
+</td>
+<td>
+    <form method="POST" action="controller">
+        <input type="hidden" name="command" value="needrefillbalance" />
+        <input class="refill_button" type="submit" value="<fmt:message key="button.refillBalance" />" />
+    </form></td>
+</tr>
+</table>
+

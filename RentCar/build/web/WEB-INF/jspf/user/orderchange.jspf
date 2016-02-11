@@ -1,0 +1,138 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<form action="controller" method="post">
+    <input type="hidden" name="command" value="orderchange">
+    <table class="ordertable">
+        <tr>
+            <td class="tb3" align="center">
+                <p><fmt:message key="order.change.header"/></p>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+        <fmt:message key="order.change.cars"/>
+        <select name="carId">
+            <option disabled><fmt:message key="order.change.selectCar"/></option>
+            <c:forEach var="car" items="${carsList}">
+                <option value="${car.carId}" size="100">${car.manufacturer}&nbsp;${car.model}&nbsp;${car.issueDate}</option>
+            </c:forEach>
+        </select>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+        <fmt:message key="order.change.selectDateFrom"/></br>
+        <c:if test="${not empty orderEdit}">
+            <input type="text" name="date" value="${orderEdit.dateFrom}" size="10" disabled="" style="margin: 5px;"><fmt:message key="order.change.currentDate"/>
+        </c:if>
+        <c:if test="${not empty orderEdit}">
+            <table>
+                <tr>
+                    <td>
+                        <select name="yearFrom" size="1" style="width: 60px;">
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="monthFrom" size="1" style="width: 80px;">
+                            <option value="01"><fmt:message key="date.month.january" /></option>
+                            <option value="02"><fmt:message key="date.month.february" /></option>
+                            <option value="03"><fmt:message key="date.month.march" /></option>
+                            <option value="04"><fmt:message key="date.month.april" /></option>
+                            <option value="05"><fmt:message key="date.month.may" /></option>
+                            <option value="06"><fmt:message key="date.month.june" /></option>
+                            <option value="07"><fmt:message key="date.month.july" /></option>
+                            <option value="08"><fmt:message key="date.month.august" /></option>
+                            <option value="09"><fmt:message key="date.month.september" /></option>
+                            <option value="10"><fmt:message key="date.month.october" /></option>
+                            <option value="11"><fmt:message key="date.month.november" /></option>
+                            <option value="12"><fmt:message key="date.month.december" /></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="dayFrom" value="" size="5" style="margin: 5px;" pattern="[0][1-9]|[12][0-9]|3[01]$">
+                    </td>
+                </tr>
+            </table>
+        </c:if>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+        <fmt:message key="order.change.selectDateTo"/></br>
+        <c:if test="${not empty orderEdit}">
+            <input type="text" name="date" value="${orderEdit.dateTo}" size="10" disabled="" style="margin: 5px;"><fmt:message key="order.change.currentDate"/>
+        </c:if>
+        <c:if test="${not empty orderEdit}">
+            <table>
+                <tr>
+                    <td>
+                        <select name="yearTo" size="1" style="width: 60px;">
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="monthTo" size="1" style="width: 80px;">
+                            <option value="01"><fmt:message key="date.month.january" /></option>
+                            <option value="02"><fmt:message key="date.month.february" /></option>
+                            <option value="03"><fmt:message key="date.month.march" /></option>
+                            <option value="04"><fmt:message key="date.month.april" /></option>
+                            <option value="05"><fmt:message key="date.month.may" /></option>
+                            <option value="06"><fmt:message key="date.month.june" /></option>
+                            <option value="07"><fmt:message key="date.month.july" /></option>
+                            <option value="08"><fmt:message key="date.month.august" /></option>
+                            <option value="09"><fmt:message key="date.month.september" /></option>
+                            <option value="10"><fmt:message key="date.month.october" /></option>
+                            <option value="11"><fmt:message key="date.month.november" /></option>
+                            <option value="12"><fmt:message key="date.month.december" /></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="dayTo" value="" size="5" style="margin: 5px;" pattern="[0][1-9]|[12][0-9]|3[01]$">
+                    </td>
+                </tr>
+            </table>
+        </c:if>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="center">
+        <c:if test="${not empty orderEdit}">
+            <input type="text" name="orderCoast" value="${orderEdit.coast}" size="10" disabled="" style="margin: 5px;"><fmt:message key="order.confirm.orderCoast"/>&nbsp;<fmt:message key="order.change.currentDate"/>
+            <input type="hidden" name="orderCoast" value="${orderEdit.coast}">
+        </c:if>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="center">
+        <c:if test="${not empty orderEdit}">
+            <input type="hidden" name="orderId" value="${orderEdit.orderId}">
+        </c:if>
+        </td>
+        </tr>
+
+
+        <tr>
+            <td align="center">
+
+                <input class="submit_button" type="submit" value="<fmt:message key="button.change" />" name="logout_button" />
+
+            </td>
+        </tr>
+
+
+    </table>
+</form>

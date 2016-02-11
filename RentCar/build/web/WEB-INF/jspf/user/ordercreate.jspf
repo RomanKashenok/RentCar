@@ -1,0 +1,118 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+
+<form action="controller" method="post">
+    <input type="hidden" name="command" value="ordercreate">
+    <input type="hidden" name="carId" value="${car.carId}">
+    <input type="hidden" name="userId" value="${userId}">
+    <table class="ordertable">
+        <tr>
+            <td align="center">
+        <fmt:message key="order.create.header"/>
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="order.create.choosedCar"/></br>
+        <input type="text" value="${car.manufacturer} | ${car.model} | ${car.issueDate}" size="30" disabled="" style="margin: 5px;">
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+        <fmt:message key="order.change.selectDateFrom"/></br>
+        <table>
+            <tr>
+                <td>
+                    <select name="yearFrom" size="1" style="width: 60px;">
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="monthFrom" size="1" style="width: 90px;">
+                        <option value="01"><fmt:message key="date.month.january" /></option>
+                        <option value="02"><fmt:message key="date.month.february" /></option>
+                        <option value="03"><fmt:message key="date.month.march" /></option>
+                        <option value="04"><fmt:message key="date.month.april" /></option>
+                        <option value="05"><fmt:message key="date.month.may" /></option>
+                        <option value="06"><fmt:message key="date.month.june" /></option>
+                        <option value="07"><fmt:message key="date.month.july" /></option>
+                        <option value="08"><fmt:message key="date.month.august" /></option>
+                        <option value="09"><fmt:message key="date.month.september" /></option>
+                        <option value="10"><fmt:message key="date.month.october" /></option>
+                        <option value="11"><fmt:message key="date.month.november" /></option>
+                        <option value="12"><fmt:message key="date.month.december" /></option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="dayFrom" value="" size="5" style="margin: 5px;" pattern="[0][1-9]|[12][0-9]|3[01]$">
+                </td>
+            </tr>
+        </table>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+        <fmt:message key="order.change.selectDateTo"/></br>
+        <table>
+            <tr>
+                <td>
+                    <select name="yearTo" size="1" style="width: 60px;">
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="monthTo" size="1" style="width: 90px;">
+                        <option value="01"><fmt:message key="date.month.january" /></option>
+                        <option value="02"><fmt:message key="date.month.february" /></option>
+                        <option value="03"><fmt:message key="date.month.march" /></option>
+                        <option value="04"><fmt:message key="date.month.april" /></option>
+                        <option value="05"><fmt:message key="date.month.may" /></option>
+                        <option value="06"><fmt:message key="date.month.june" /></option>
+                        <option value="07"><fmt:message key="date.month.july" /></option>
+                        <option value="08"><fmt:message key="date.month.august" /></option>
+                        <option value="09"><fmt:message key="date.month.september" /></option>
+                        <option value="10"><fmt:message key="date.month.october" /></option>
+                        <option value="11"><fmt:message key="date.month.november" /></option>
+                        <option value="12"><fmt:message key="date.month.december" /></option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="dayTo" value="" size="5" style="margin: 5px;" pattern="[0][1-9]|[12][0-9]|3[01]$">
+                </td>
+            </tr>
+        </table>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="center">
+                <c:if test="${not empty orderedDatesList}">
+                    <b><fmt:message key="order.booked.dates" /><b></br>
+                    <c:forEach var="date" items="${orderedDatesList}">
+                        ${date.dateFrom}&nbsp;&nbsp;-&nbsp;&nbsp;${date.dateTo}</br>
+                    </c:forEach>
+                </c:if>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="center">
+
+                <input class="submit_button" type="submit" value="<fmt:message key="button.save" />"  />
+
+            </td>
+        </tr>
+
+
+    </table>
+</form>

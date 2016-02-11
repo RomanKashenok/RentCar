@@ -1,0 +1,167 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<form action="controller" method="post">
+    <input type="hidden" name="command" value="confirmnewcar">
+    <table class="ordertable">
+        <tr>
+            <td class="tb3" align="center">
+                <p><fmt:message key="car.add.new" /></p>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+        <fmt:message key="car.manufacturer"/>
+        </td>
+        <td align="left">
+            <input type="text" name="manufacturer" value="" pattern="^[A-Za-zА-Яа-я0-9 ]{3,15}$">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.model"/>
+        </td>
+        <td align="left">
+            <input type="text" name="model" value="" pattern="[A-Za-zА-Яа-я0-9 ]{3,15}$">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.vin"/>
+        </td>
+        <td align="left">
+            <input type="text" name="vin" value="" pattern="^[A-Za-z0-9]{10,16}$">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.colour"/>
+        </td>
+        <td align="left">
+            <input type="text" name="colour" value="" pattern="^[A-Za-zА-Яа-я ]{3,15}$">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.year"/>
+        </td>
+        <td align="left">
+            <table>
+                <tr>
+                    <td>
+                        <select name="year" size="1" style="width: 60px;">
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2012</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="month" size="1" style="width: 80px;">
+                            <option value="01"><fmt:message key="date.month.january" /></option>
+                            <option value="02"><fmt:message key="date.month.february" /></option>
+                            <option value="03"><fmt:message key="date.month.march" /></option>
+                            <option value="04"><fmt:message key="date.month.april" /></option>
+                            <option value="05"><fmt:message key="date.month.may" /></option>
+                            <option value="06"><fmt:message key="date.month.june" /></option>
+                            <option value="07"><fmt:message key="date.month.july" /></option>
+                            <option value="08"><fmt:message key="date.month.august" /></option>
+                            <option value="09"><fmt:message key="date.month.september" /></option>
+                            <option value="10"><fmt:message key="date.month.october" /></option>
+                            <option value="11"><fmt:message key="date.month.november" /></option>
+                            <option value="12"><fmt:message key="date.month.december" /></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="day" value="01" size="5" style="margin: 5px;" pattern="[0][1-9]|[12][0-9]|3[01]$">
+                    </td>
+                </tr>
+            </table>
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.transmission"/>
+        </td>
+        <td align="left">
+            <select name="transmission" size="1" style="width: 150px;">
+                <option><fmt:message key="car.transmission.choose" /></option>
+                <option value="automatic" selected=""><fmt:message key="car.transmission.automatic" /></option>
+                <option value="mechanic"><fmt:message key="car.transmission.mechanic" /></option>
+            </select>
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.engineCapacity"/>
+        </td>
+        <td align="left">
+            <input type="text" name="engineCapacity" value="" pattern="[1-9]{3,4}$">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.fuelConsumpting"/>
+        </td>
+        <td align="left">
+            <input type="text" name="fuelConsumpting" value="" pattern="[1-9]{1,2}$">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.fuel"/>
+        </td>
+        <td align="left">
+            <select name="fuel" size="1" style="width: 150px;">
+                <option><fmt:message key="car.fuel.choose" /></option>
+                <option value="diesel"><fmt:message key="car.fuel.diesel" /></option>
+                <option value="gasoline" selected=""><fmt:message key="car.fuel.gasoline" /></option>
+                <option value="hybrid"><fmt:message key="car.fuel.hybrid" /></option>
+            </select>
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.rentCoast"/>
+        </td>
+        <td align="left">
+            <input type="text" name="price" value="" pattern="^[0-9]+(\.[0-9]+)?$">
+        </td>
+        </tr>
+        <tr>
+            <td align="left">
+        <fmt:message key="car.status"/>
+        </td>
+        <td align="left">
+            <select name="status" size="1" style="width: 150px;">
+                <option><fmt:message key="car.status.choose" /></option>
+                <option value="available" selected=""><fmt:message key="car.status.availible" /></option>
+                <option value="unavailable"><fmt:message key="car.status.unavailible" /></option>
+                <option value="broken"><fmt:message key="car.status.broken" /></option>
+            </select>
+        </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+
+                <input class="submit_button" type="submit" value="<fmt:message key="button.change" />" name="change_button" />
+
+            </td>
+        </tr>
+        <c:if test="${not empty carSaveFailed}">
+            <fmt:message key="car.save.failed"/>
+        </c:if>
+        <c:if test="${not empty vinAlreadyExists}">
+            <fmt:message key="vin.already.exists"/>
+        </c:if>
+
+    </table>
+</form>

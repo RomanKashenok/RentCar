@@ -1,0 +1,13 @@
+<%@ page pageEncoding="UTF-8" %>
+<fmt:message key="session.finished" />
+<table border="0" style="margin: auto;">
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <button type="submit"><fmt:message key="button.relogin" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>

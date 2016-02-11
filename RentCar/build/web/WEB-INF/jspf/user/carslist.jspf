@@ -1,0 +1,67 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<c:forEach var="car" items="${carsList}">
+    <form id="registerForm" method="POST" action="controller">
+        <table class="conttable">
+            <thead>
+                <tr>
+                    <th>${car.manufacturer}</th>
+                </tr>
+            </thead>
+            <tbody class="conttable" style="border: 1px solid #009966;">
+                <tr>
+                    <td class="changeordertable">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.model"/></i></b></td>
+                    <td>${car.model}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.year"/></i></b></td>
+                    <td>${car.issueDate}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.colour"/></i></b></td>
+                    <td>${car.colour}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.transmission"/></i></b></td>
+                    <td>${car.transmission}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.engineCapacity"/></i></b></td>
+                    <td>${car.engineCapacity}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.fuel"/></i></b></td>
+                    <td>${car.engineType}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.fuelConsumpting"/></i></b></td>
+                    <td>${car.fuelConsumpting}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.rentCoast"/></i></b></td>
+                    <td>${car.price}</td>
+                </tr>
+                <tr style="border: 1px solid;">
+
+                </tr>
+            </tbody>
+        </table>
+        <table class="conttable">
+            <tr>
+                <td>
+                    <img src="img/cars/${car.model}.png" width="250" alt="<fmt:message key="alt.noimage" />" />
+                </td>
+            </tr>
+        </table>
+
+        <div class="register">
+            <input type="hidden" name="command" value="orderneedcreate" />
+            <input type="hidden" name="carId" value="${car.carId}">
+            <button type="submit"><fmt:message key="button.createOrder" /></button>
+        </div>
+    </form>
+</c:forEach>

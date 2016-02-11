@@ -1,0 +1,89 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+
+<c:forEach var="order" items="${adminStatusOrderList}">
+    <table border="0"  class="confirmordertable">
+        <thead>
+            <tr>
+                <th><fmt:message key="order.id"/></th>
+        <th>${order.orderId}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><fmt:message key="order.confirm.car"/></td>
+        <td>${order.car.manufacturer}&nbsp;|&nbsp;${order.car.model}&nbsp;</td>
+        </tr>
+        <tr>
+            <td><fmt:message key="order.confirm.dateFrom"/></td>
+        <td>${order.dateFrom}</td>
+        </tr>
+        <tr>
+            <td><fmt:message key="order.confirm.dateTo"/></td>
+        <td>${order.dateTo}</td>
+        </tr>
+        <tr>
+            <td><fmt:message key="order.confirm.orderCoast"/></td>
+        <td>${order.coast}</td>
+        </tr>
+        <tr>
+            <td class="ordertable"><fmt:message key="order.status"/></td>
+        <td class="ordertable">${order.orderStatus}</td>
+        </tr>
+
+        <c:choose>
+            <c:when test="${order.orderStatus=='UNCONFIRMED'}">
+                <tr>
+                    <td>
+                        <form class="userUnBlock" action="controller" method="POST">
+                            <div class="register">
+                                <input type="hidden" name="command" value="adminmainconfirmorder" />
+                                <input type="hidden" name="orderId" value="${order.orderId}" />
+                                <input type="hidden" name="userChangeId" value="${order.user.userId}">
+                                <button type="submit"><fmt:message key="button.order.confirm" /></button>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form class="userBlock" action="controller" method="POST">
+                            <div class="register">
+                                <input type="hidden" name="command" value="adminmaincancelorder" />
+                                <input type="hidden" name="orderId" value="${order.orderId}" />
+                                <input type="hidden" name="userChangeId" value="${order.user.userId}">
+                                <button type="submit"><fmt:message key="button.order.cancel" /></button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </c:when>
+            <c:when test="${order.orderStatus=='CANCELED'}">
+                <tr>
+                    <td style="color: #ff3333;">
+                        <b> ${order.cancelMessage}</b>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </c:when>
+
+            <c:when test="${order.orderStatus=='CONFIRMED'}">
+                <tr>
+                    <td></td>
+                    <td>
+
+                    </td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+
+            </c:otherwise>
+        </c:choose>
+        </tbody>
+    </table>
+
+
+    </br>
+
+
+</c:forEach>

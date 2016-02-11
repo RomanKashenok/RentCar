@@ -1,0 +1,16 @@
+com.kashenok.rentcar.command
+com.kashenok.rentcar.command.admin
+com.kashenok.rentcar.command.navigation
+com.kashenok.rentcar.command.user
+com.kashenok.rentcar.controller
+com.kashenok.rentcar.database.dao
+com.kashenok.rentcar.database.pool
+com.kashenok.rentcar.encryption
+com.kashenok.rentcar.entity
+com.kashenok.rentcar.exception
+com.kashenok.rentcar.filter
+com.kashenok.rentcar.owntag
+com.kashenok.rentcar.resource
+com.kashenok.rentcar.service
+com.kashenok.rentcar.util
+com.kashenok.rentcar.validator

@@ -1,0 +1,39 @@
+<%@ page pageEncoding="UTF-8" %>
+<form>
+    <table class="conttable">
+        <tr>
+            <td>
+        <fmt:message key="balance.enterSum" />
+        </td>
+        </tr>
+        <tr>
+            <td>
+        <c:if test="${not empty order}">
+            <input type="text" name="refillBalance" value="" size="10" pattern="[0-9]{1,7}"> 
+        </c:if>
+        <c:if test="${not empty orderEdited}">
+            <input type="text" name="refillBalance" value="" size="10" pattern="[0-9]{1,7}"> 
+        </c:if>
+        <c:if test="${not empty penalty}">
+            <input type="text" name="refillBalance" value="" size="10" pattern="[0-9]{1,7}"> 
+        </c:if>
+        </td>
+        <td>
+            </tr>
+        <tr>
+            </td>
+            <td>
+
+                <input type="hidden" name="command" value="refillbalance" />
+                <input class="refill_button" type="submit" value="<fmt:message key="button.refillBalance" />" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+        <c:if test="${not empty refillFailedMessage}">
+            <fmt:message key="balance.refill.failed"/>
+        </c:if>
+        </td>
+        </tr>
+    </table>
+</form>

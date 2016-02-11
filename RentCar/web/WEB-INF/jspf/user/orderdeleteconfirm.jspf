@@ -1,0 +1,88 @@
+<%@ page pageEncoding="UTF-8" %>
+<table class="ordertable" style="align: center;">
+    <thead>
+        <tr>
+            <th><fmt:message key="order.confirm.delete.header"/></th>
+</tr>
+</thead>
+
+<tr>
+    <td align="left">
+<fmt:message key="order.confirm.car"/>
+</td>
+<td>
+<c:if test="${not empty orderDelete}">
+    <input type="text" name="date" value="${orderDelete.car.manufacturer}&nbsp;${orderDelete.car.model}&nbsp;${orderDelete.car.issueDate}" size="30" disabled="" style="margin: 5px;">
+</c:if>
+</td>
+</tr>
+
+<tr>
+    <td align="left">
+<fmt:message key="order.confirm.dateFrom"/>
+</td><td>
+<c:if test="${not empty orderDelete}">
+    <input type="text" name="date" value="${orderDelete.dateFrom}" size="10" disabled="" style="margin: 5px;">
+</c:if>
+</td>
+</tr>
+
+<tr>
+    <td align="left">
+<fmt:message key="order.confirm.dateTo"/>
+</td><td>
+<c:if test="${not empty orderDelete}">
+    <input type="text" name="date" value="${orderDelete.dateTo}" size="10" disabled="" style="margin: 5px;">
+</c:if>
+</td>
+</tr>
+
+<tr>
+    <td align="left">
+<fmt:message key="order.confirm.orderCoast"/>
+</td>
+<td>
+<c:if test="${not empty orderDelete}">
+    <input type="text" name="date" value="${orderDelete.coast}" size="10" disabled="" style="margin: 5px;">
+</c:if>
+</td>
+</tr>
+
+
+
+<tr>
+    <td align="center">
+        <form method="POST" action="controller">
+            <input type="hidden" name="command" value="orderdeleteconfirm" />
+            <input class="submit_button" type="submit" value="<fmt:message key="button.delete" />" name="save_button" />
+        </form>
+    </td>
+    <td align="center">
+        <form method="POST" action="controller">
+            <input type="hidden" name="command" value="ordercancel" />
+            <input class="submit_button" type="submit" value="<fmt:message key="button.cancel" />" name="cancel_button" />
+        </form>
+    </td>
+</tr>
+<tr>
+    <td>
+<c:if test="${not empty confirmOrderFailedMessage}">
+    <fmt:message key="order.confirm.failed"/>
+</c:if>
+</td>
+</tr>
+
+<tr>
+    <td>
+<c:if test="${not empty orderDeleteFailed}">
+    <fmt:message key="order.delete.failed"/>
+</c:if>
+</td>
+<td>
+
+</td>
+</tr>
+
+
+
+</table>

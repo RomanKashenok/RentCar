@@ -1,0 +1,65 @@
+<%@ page pageEncoding="UTF-8" %>
+<table border="0"  class="confirmordertable">
+    <thead>
+        <tr>
+            <th><fmt:message key="order.id"/></th>
+<th>${orderPenalty.orderId}</th>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td><fmt:message key="order.confirm.car"/></td>
+<td>${orderPenalty.car.manufacturer}&nbsp;|&nbsp;${orderPenalty.car.model}&nbsp;</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.dateFrom"/></td>
+<td>${orderPenalty.dateFrom}</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.dateTo"/></td>
+<td>${orderPenalty.dateTo}</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.orderCoast"/></td>
+<td>${orderPenalty.coast}</td>
+</tr>
+
+</tbody>
+</table>
+<form class="userChange" action="controller" method="POST">
+    <table  border="0"  class="confirmordertable">
+        <c:if test="${not empty orderCancellingError}">
+            <fmt:message key="order.cancelling.error"/>
+        </c:if>
+        <tbody>
+            <tr>
+                <td>
+        <fmt:message key="order.penalty.sum" />
+        </br>
+        <input type="text" name="penaltySum" value="" size="10" style="margin: 5px;" pattern="[0-9]{1,7}$">
+        </td>
+        </tr>
+        <tr>
+            <td>
+        <fmt:message key="order.penalty.why" />
+        <textarea name="penaltyMessage" cols="50" rows="2" wrap="soft"></textarea>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="register">
+                    <input type="hidden" name="command" value="confirmpenalty" />
+                    <input type="hidden" name="orderId" value="${orderPenalty.orderId}" />
+                    <input type="hidden" name="carId" value="${orderPenalty.car.carId}" />
+                    <input type="hidden" name="userId" value="${orderPenalty.user.userId}" />
+                    <button type="submit"><fmt:message key="button.order.penalty" /></button>
+                </div>
+        <c:if test="${not empty penaltyMakingFailed}">
+            <fmt:message key="penalty.make.failed"/>
+        </c:if>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>

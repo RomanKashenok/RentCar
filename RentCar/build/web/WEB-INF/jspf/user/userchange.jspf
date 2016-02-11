@@ -1,0 +1,69 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<form method="POST" action="controller">
+    <table class="ordertable" style="align: center;">
+        <thead>
+            <tr>
+                <th><fmt:message key="user.change.table"/></th>
+        </tr>
+        </thead>
+
+        <tr>
+            <td align="left">
+        <fmt:message key="user.email" />
+    </td><td>
+<c:if test="${not empty userChange}">
+    <input type="text" name="email" value="${userChange.email}" size="30" style="margin: 5px;" pattern="[0-9a-z_\.]+@[0-9a-z_^.]+\.[a-z]{2,6}$">
+</c:if>
+</td>
+</tr>
+
+<tr>
+    <td align="left">
+<fmt:message key="user.firstName" />
+</td><td>
+<c:if test="${not empty userChange}">
+    <input type="text" name="firstName" value="${userChange.firstName}" size="30" style="margin: 5px;" pattern="^[A-ZА-Я][а-яА-ЯёЁa-zA-Z]{1,50}$">
+</c:if>
+</td>
+</tr>
+
+<tr>
+    <td align="left">
+<fmt:message key="user.lastName" />
+</td><td>
+<c:if test="${not empty userChange}">
+    <input type="text" name="lastName" value="${userChange.lastName}" size="30" style="margin: 5px;" pattern="^[A-ZА-Я][а-яА-ЯёЁa-zA-Z]{1,50}$">
+</c:if>
+</td>
+</tr>
+
+<tr>
+    <td align="left">
+
+        <input type="hidden" name="command" value="profileconfirmchange" />
+        <input class="submit_button" type="submit" value="<fmt:message key="button.save" />" name="save_button" />
+
+    </td>
+
+</tr>
+
+
+<tr>
+    <td>
+        <b>
+            <c:if test="${not empty errorUpdating}">
+                <fmt:message key="update.error"/>
+            </c:if>
+            <c:if test="${not empty emailAlreadyExists}">
+                <fmt:message key="option.emailAlreadyExists"/>
+            </c:if>
+            <c:if test="${not empty passportAlreadyExists}">
+                <fmt:message key="option.passportAlreadyExists"/>
+            </c:if>
+        </b>
+    </td>
+</tr>
+
+</table>
+</form>

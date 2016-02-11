@@ -1,0 +1,55 @@
+<%@ page pageEncoding="UTF-8" %>
+<c:forEach var="order" items="${acceptedOrderList}">
+    <form id="registerForm" method="POST" action="controller">
+        <table class="confirmordertable">
+            <thead>
+                <tr>
+                    <th>${order.car.manufacturer}&nbsp;|&nbsp;${order.car.model}&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody class="conttable">
+                <tr>
+                    <td class="changeordertable">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b><i><fmt:message key="car.transmission"/></i></b></td>
+                    <td>${order.car.transmission}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.fuel"/></i></b></td>
+                    <td>${order.car.engineType}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.fuelConsumpting"/></i></b></td>
+                    <td>${order.car.fuelConsumpting}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="order.confirm.dateFrom"/></i></b></td>
+                    <td class="ordertable">${order.dateFrom}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="order.confirm.dateTo"/></i></b></td>
+                    <td class="ordertable">${order.dateTo}</td>
+                </tr>
+                <tr>
+                    <td class="ordertable"><b><i><fmt:message key="order.confirm.orderCoast"/></i></b></td>
+                    <td class="ordertable">${order.coast}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="car.rentCoast"/></i></b></td>
+                    <td>${order.car.price}</td>
+                </tr>
+                <tr style="border: 1px solid;">
+
+                </tr>
+            </tbody>
+        </table>
+        <table class="confirmordertable">
+            <tr>
+                <td><img src="img/cars/${order.car.model}.png" width="70%" alt="<fmt:message key="alt.noimage" />" /></td>
+            </tr>
+        </table>
+    </form>
+</c:forEach>

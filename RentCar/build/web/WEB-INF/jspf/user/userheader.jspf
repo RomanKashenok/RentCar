@@ -1,0 +1,11 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="header">
+    <div><fmt:message key="welcome" /><ctg:role-display firstName="${firstName}" /></br></div>
+    <!-- end .header -->
+    <form id="registerForm" action="controller" method="post">
+        <input type="hidden" name="command" value="logout" />
+        <div class="register">
+            <button type="submit"><fmt:message key="option.logOut" /></button>
+        </div>
+    </form>
+</div>

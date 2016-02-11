@@ -1,0 +1,158 @@
+body {
+    background: #528B8B;
+}
+#loginForm {
+    width: 290px;
+    padding: 20px 20px 0 20px;
+    margin: 100px auto 0;
+    background: #FEFEFE;
+    border-radius: 10px;
+    font: 14px/18px Arial, Tahoma, sans-serif;
+    color: #444;
+}
+#loginForm .field {
+    margin: 0 0 5px;
+}
+#loginForm .field label {
+    display: block;
+    margin: 0 0 4px;
+}
+
+#loginForm .field input {
+    font: 12px Arial, Tahoma, sans-serif;
+    color: #444;
+    width: 262px;
+    padding: 9px 13px;
+    outline: none;
+}
+
+
+#forgot {
+    float: right;
+    font-size: 11px;
+    color: #838B83;
+    text-decoration: none;
+    margin: 0;
+}
+#forgot:hover {
+    color: #444;
+    text-decoration: underline;
+}
+
+
+#loginForm .submit {
+    overflow: hidden;
+    margin: 20px -20px 0;
+    padding: 22px 20px;
+    background: #8DB6CD;
+    font-size: 11px;
+}
+
+#remember {
+    display: block;
+    margin: 5px 0 0;
+    cursor: pointer;
+}
+#remember input {
+    margin: 0 4px 0 0;
+    vertical-align: middle;
+}
+#loginForm .submit button {
+    float: right;
+    padding: 6px 20px;
+    height: 30px;
+    border-top: 1px solid #528B8B;
+    border-bottom: 1px solid #528B8B;
+    border-left: 1px solid #528B8B;
+    border-right: 1px solid #528B8B;
+    border-radius: 4px;
+    color: #FFF;
+    font: bold 13px Arial, Tahoma, sans-serif;
+    background-color: #528B8B;
+    cursor: pointer;
+    text-shadow: 0 -1px rgba(0,0,0,0.15);
+    outline: none;
+}
+
+#loginForm .submit button:hover {
+    background-color: #607B8B;
+}
+
+#loginForm .submit button::-moz-focus-inner{border:0}
+
+#loginForm p {
+    color: #FFF;
+    margin: 5px 10px 0 0;
+    font-size: 11px;
+}
+
+#errorButtonForm {
+    width: 600px;
+    padding: 20px;
+    margin: 200px auto 0;
+    background: #FEFEFE;
+    border-radius: 10px;
+    font: 14px/18px Arial, Tahoma, sans-serif;
+    color: #444;
+}
+
+#errorForm {
+    width: 600px;
+    padding: 20px;
+    margin: 200px auto 0;
+    background: #FEFEFE;
+    border-radius: 10px;
+    font: 14px/18px Arial, Tahoma, sans-serif;
+    color: #444;
+}
+
+#errorForm p {
+    color: #FFF;
+    margin: 30px 10px 0 0;
+    font-size: 11px;
+}
+
+#registerForm {
+    width: 290px;
+    padding: 0 20px 0 20px;
+    margin: 0 auto 0;
+    background: #FEFEFE;
+    border-radius: 0 0 8px 8px;
+    font: 14px/18px Arial, Tahoma, sans-serif;
+    color: #444;
+}
+
+#registerForm .register {
+    overflow: hidden;
+    margin: -10px -20px 0;
+    padding: 0px 105px;
+    background: #8DB6CD;
+    border-radius: 0 0 8px 8px;
+    font-size: 11px;
+}
+
+#registerForm .register button {
+    float: right;
+    padding: 6px 20px;
+    margin-bottom: 5px;
+    height: 30px;
+    border-top: 1px solid #528B8B;
+    border-bottom: 1px solid #528B8B;
+    border-left: 1px solid #528B8B;
+    border-right: 1px solid #528B8B;
+    border-radius: 4px;
+    color: #FFF;
+    font: bold 13px Arial, Tahoma, sans-serif;
+
+    background-color: #528B8B;
+    cursor: pointer;
+    text-shadow: 0 -1px rgba(0,0,0,0.15);
+    outline: none;
+}
+
+#registerForm .register button:hover {
+
+    background-color: #607B8B;
+}
+
+#registerForm .register button::-moz-focus-inner{border:0}

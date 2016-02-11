@@ -1,0 +1,144 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+
+
+<table border="0" style="margin: auto;">
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <input type="hidden" name="command" value="showorderbystatus" />
+                    <input type="hidden" name="orderStatus" value="confirmed" />
+                    <button type="submit"><fmt:message key="button.acceptedOrders" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+<table border="0" style="margin: auto;">
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <input type="hidden" name="command" value="showorderbystatus" />
+                    <input type="hidden" name="orderStatus" value="canceled" />
+                    <button type="submit"><fmt:message key="button.canceledOrders" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+<table border="0" style="margin: auto;">
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <input type="hidden" name="command" value="showorderbystatus" />
+                    <input type="hidden" name="orderStatus" value="unconfirmed" />
+                    <button type="submit"><fmt:message key="button.unprocessed" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+<table border="0" style="margin: auto;">
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <input type="hidden" name="command" value="showorderbystatus" />
+                    <input type="hidden" name="orderStatus" value="finished" />
+                    <button type="submit"><fmt:message key="button.finished" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+    
+<c:if test="${not empty ordersGetError}">
+    <fmt:message key="order.list.empty"/>
+</c:if>
+    
+<c:forEach var="order" items="${allOrders}">
+    <table border="0"  class="confirmordertable">
+        <thead>
+            <tr>
+                <th><fmt:message key="order.id"/></th>
+    <th>${order.orderId}</th>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td><fmt:message key="order.confirm.car"/></td>
+<td>${order.car.manufacturer}&nbsp;|&nbsp;${order.car.model}&nbsp;</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.dateFrom"/></td>
+<td>${order.dateFrom}</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.dateTo"/></td>
+<td>${order.dateTo}</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.orderCoast"/></td>
+<td>${order.coast}</td>
+</tr>
+<tr>
+    <td class="ordertable"><fmt:message key="order.status"/></td>
+<td class="ordertable">${order.orderStatus}</td>
+</tr>
+
+<c:choose>
+    <c:when test="${order.orderStatus=='UNCONFIRMED'}">
+        <tr>
+            <td>
+                <form class="userUnBlock" action="controller" method="POST">
+                    <div class="register">
+                        <input type="hidden" name="command" value="adminconfirmorder" />
+                        <input type="hidden" name="orderId" value="${order.orderId}" />
+                        <button type="submit"><fmt:message key="button.order.confirm" /></button>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form class="userBlock" action="controller" method="POST">
+                    <div class="register">
+                        <input type="hidden" name="command" value="admincancelorder" />
+                        <input type="hidden" name="orderId" value="${order.orderId}" />
+                        <button type="submit"><fmt:message key="button.order.cancel" /></button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </c:when>
+    <c:when test="${order.orderStatus=='CANCELED'}">
+        <tr>
+            <td style="color: #ff3333;">
+                <b> ${order.cancelMessage}</b>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </c:when>
+        
+    <c:when test="${order.orderStatus=='CONFIRMED'}">
+        <tr>
+            <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </c:when>
+    <c:otherwise>
+
+    </c:otherwise>
+</c:choose>
+</tbody>
+</table>
+
+
+</br>
+
+
+</c:forEach>

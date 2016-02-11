@@ -1,0 +1,40 @@
+<%@ page pageEncoding="UTF-8" %>
+<table class="conttable">
+    <thead>
+        <tr>
+            <th><fmt:message key="user.profile.title" />${firstName}</th>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td><b><fmt:message key="user.firstName" /></b></td>
+        <td>${firstName}</td>
+    </tr>
+    <tr>
+        <td><b><fmt:message key="user.role" /></b></td>
+        <td>${role}</td>
+    </tr>
+    <tr>
+        <td><b><fmt:message key="user.email" /></b></td>
+        <td>${email}</td>
+    </tr>
+    <tr>
+        <td><b><fmt:message key="user.passportNumber" /></b></td>
+        <td>${passportNumber}</td>
+    </tr>
+    <tr>
+        <td><b><fmt:message key="user.balance" /></b></td>
+        <td>${userBalance}</td>
+    </tr>
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <input type="hidden" name="command" value="profilechange" />
+                    <button type="submit"><fmt:message key="button.change" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</tbody>
+</table>

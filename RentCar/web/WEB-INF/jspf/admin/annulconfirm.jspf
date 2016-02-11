@@ -1,0 +1,56 @@
+<%@ page pageEncoding="UTF-8" %>
+<table border="0"  class="confirmordertable">
+    <thead>
+        <tr>
+            <th><fmt:message key="order.id"/></th>
+<th>${order.orderId}</th>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td><fmt:message key="order.confirm.car"/></td>
+<td>${order.car.manufacturer}&nbsp;|&nbsp;${order.car.model}&nbsp;</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.dateFrom"/></td>
+<td>${order.dateFrom}</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.dateTo"/></td>
+<td>${order.dateTo}</td>
+</tr>
+<tr>
+    <td><fmt:message key="order.confirm.orderCoast"/></td>
+<td>${order.coast}</td>
+</tr>
+<tr>
+    <td class="ordertable"><fmt:message key="order.status"/></td>
+<td class="ordertable">${order.orderStatus}</td>
+</tr>
+</tbody>
+</table>
+<form class="userUnBlock" action="controller" method="POST">
+    <table  border="0"  class="confirmordertable">
+        <c:if test="${not empty orderCancellingError}">
+            <fmt:message key="order.cancelling.error"/>
+        </c:if>
+        <tbody>
+            <tr>
+                <td>
+        <fmt:message key="order.cancel.why" />
+        </br><textarea name="cancelMessage" cols="50" rows="2" wrap="soft"></textarea>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="register">
+                    <input type="hidden" name="command" value="confirmordercancel" />
+                    <input type="hidden" name="orderId" value="${order.orderId}" />
+                    <button type="submit"><fmt:message key="button.order.cancel" /></button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>

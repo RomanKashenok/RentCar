@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>2.0</tlib-version>
+    <short-name>ctg</short-name>
+    <uri>customtags</uri>
+    <!-- A validator verifies that the tags are used correctly at JSP
+          translation time. Validator entries look like this: 
+       <validator>
+           <validator-class>com.mycompany.TagLibValidator</validator-class>
+           <init-param>
+              <param-name>parameter</param-name>
+              <param-value>value</param-value>
+           </init-param>
+       </validator>
+    -->
+    <!-- A tag library can register Servlet Context event listeners in
+         case it needs to react to such events. Listener entries look
+         like this: 
+      <listener>
+          <listener-class>com.mycompany.TagLibListener</listener-class> 
+      </listener>
+    -->
+    <tag>
+        <name>role-display</name>
+        <tag-class>com.kashenok.rentcar.owntag.ShowRoleTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>role</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>firstName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>copyright</name>
+        <tag-class>com.kashenok.rentcar.owntag.Copyright</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+
+
+
+
+
+    <tag>
+        <name>order-table</name>
+        <tag-class>com.kashenok.rentcar.owntag.OrderTabMaker</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>rows</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>orderList</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+</taglib>

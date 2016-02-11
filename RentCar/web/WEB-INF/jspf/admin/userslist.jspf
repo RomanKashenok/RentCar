@@ -1,0 +1,99 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+<c:forEach var="user" items="${usersList}">                                
+    <c:if test="${user.role!='ADMIN'}"> 
+        <table class="conttable">
+            <thead>
+                <tr>
+                    <th><img src="img/user.png" width="60%"></th>
+                    <th>
+                        <table>
+                            <tr>
+                                <td>${user.firstName}</td>
+                                <td>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+            </thead>
+
+
+            <tbody class="conttable">
+                <tr>
+                    <td class="changeordertable">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="user.role"/></i></b></td>
+                    <td>${user.role}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="user.lastName"/></i></b></td>
+                    <td>${user.lastName}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="user.email"/></i></b></td>
+                    <td>${user.email}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="user.passportNumber"/></i></b></td>
+                    <td>${user.passportNumber}</td>
+                </tr>
+                <tr>
+                    <td><b><i><fmt:message key="user.balance"/></i></b></td>
+                    <td>${user.balance}</td>
+                </tr>
+
+                <tr style="border: 1px solid;">
+
+                </tr>
+            </tbody>
+        </table>
+        <table class="conttable">
+            <tr>
+                <td>
+                    <form class="userChange" action="controller" method="POST">
+                        <div class="register">
+                            <input type="hidden" name="command" value="showUserOrders" />
+                            <input type="hidden" name="userChangeId" value="${user.userId}">
+                            <button type="submit"><fmt:message key="nav.orders" /></button>
+                        </div>
+                    </form>
+                </td>
+                <td>
+
+
+
+                    <c:choose>
+                        <c:when test="${user.role=='DISABLED'}">
+                            <form class="userUnBlock" action="controller" method="POST">
+                                <div class="register">
+                                    <input type="hidden" name="command" value="blockuser" />
+                                    <input type="hidden" name="userId" value="${user.userId}">
+                                    <input type="hidden" name="action" value="user">
+                                    <button type="submit"><fmt:message key="button.unBlockUser" /></button>
+                                </div>
+                            </form>
+                        </c:when>
+                        <c:when test="${user.role=='USER'}">
+                            <form class="userBlock" action="controller" method="POST">
+                                <div class="register">
+                                    <input type="hidden" name="command" value="blockuser" />
+                                    <input type="hidden" name="userId" value="${user.userId}">
+                                    <input type="hidden" name="action" value="disabled">
+                                    <button type="submit"><fmt:message key="button.blockUser" /></button>
+                                </div>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+
+                        </c:otherwise>
+                    </c:choose>
+
+                </td>
+            </tr>
+        </table>
+    </c:if>
+</c:forEach>

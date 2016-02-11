@@ -1,0 +1,43 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="navigation">
+    <table border="0" style="margin: auto;">
+        <tr>
+            <td>
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="gotomain" />
+                        <button type="submit"><fmt:message key="nav.main" /></button>
+                    </div>
+                </form>
+            </td>
+            <td style="width: 20%;"></td>
+            <td>
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="showuserorderlist" />
+                        <button type="submit"><fmt:message key="nav.orders" /></button>
+                    </div>
+                </form>
+            </td>
+            <td style="width: 20%;"></td>
+            <td>
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="showuserordersarchive" />
+                        <button type="submit"><fmt:message key="nav.orders.archive" /></button>
+                    </div>
+                </form>
+            </td>
+            <td style="width: 20%;"></td>
+            <td>
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="aboutus" />
+                        <button type="submit"><fmt:message key="nav.about" /></button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</div>

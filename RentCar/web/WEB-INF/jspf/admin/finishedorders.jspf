@@ -1,0 +1,74 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+<c:forEach var="order" items="${finishedOrders}">                                
+    <table class="conttable" >
+        <thead class="conttable">
+            <tr>
+                <th style="padding-left: 5px;">
+        <fmt:message key="order.id"/>&nbsp;
+        <img src="img/finished.png" width="30%">
+        </th>
+        <th>
+            <table>
+                <tr>
+                    <td>${order.orderId}</td>
+                    <td>
+
+                    </td>
+                </tr>
+            </table>
+        </th>
+    </tr>
+</thead>
+
+<tbody class="conttable">
+    <tr>
+        <td><b><i><fmt:message key="order.create.choosedCar"/></i></b></td>
+        <td style="width: 50%;">${order.car.manufacturer} &nbsp;|&nbsp;${order.car.model}</td>
+    </tr>
+    <tr>
+        <td><b><i><fmt:message key="car.vin"/></i></b></td>
+        <td>${order.car.VIN}</td>
+    </tr>
+    <tr>
+        <td><b><i><fmt:message key="order.confirm.dateFrom"/></i></b></td>
+        <td>${order.dateFrom}</td>
+    </tr>
+    <tr>
+        <td><b><i><fmt:message key="order.confirm.dateTo"/></i></b></td>
+        <td>${order.dateTo}</td>
+    </tr>
+    <tr style="border: 1px solid;">
+
+    </tr>
+</tbody>
+</table>
+<table class="conttable">
+    <tr>
+        <td>
+            <form class="userUnBlock" action="controller" method="POST">
+                <div class="register">
+                    <input type="hidden" name="command" value="acceptfinishedorder" />
+                    <input type="hidden" name="orderId" value="${order.orderId}">
+                    <button type="submit"><fmt:message key="button.accept" /></button>
+                </div>
+            </form>
+        </td>
+        <td>
+
+            
+        <td>
+            <form class="userBlock" action="controller" method="POST">
+                <div class="register">
+                    <input type="hidden" name="command" value="penaltyfinishedorder" />
+                    <input type="hidden" name="orderId" value="${order.orderId}">
+                    <button type="submit"><fmt:message key="button.penalty" /></button>
+                </div>
+            </form>
+        </td>
+        <td>
+
+        </td>
+    </tr>
+</table>
+</c:forEach>

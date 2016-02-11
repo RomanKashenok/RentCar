@@ -1,0 +1,32 @@
+<%@ page pageEncoding="UTF-8" %>
+<table cellspacing="0" cellpadding="0">
+    <tr>
+        <td style="width: 100%">&nbsp&nbsp</td>
+        <td>
+            <form action="controller" method="post" id="button_lang">
+                <input type="hidden" name="command" value="changelang">
+                <input type="hidden" name="language" value="en">
+                <table border="0">
+                    <thead>
+                        <tr>
+                    <input type="submit" value="" style="background-image: url(img/en.png); width: 38px; height: 28px; border: 0; cursor: pointer;">
+                    </tr>
+                    </thead>
+                </table>
+            </form>
+        </td>
+        <td>&nbsp&nbsp</td>
+        <td>
+            <form action="controller" method="post" id="button_lang" >
+                <input type="hidden" name="command" value="changelang">
+                <input type="hidden" name="language" value="ru">
+                <table border="0">
+                    <thead>
+                        <tr>
+                    <input type="submit" value="" style="background-image: url(img/ru.png);  width: 38px; height: 28px; border: 0;  cursor: pointer;">
+                    </tr>
+                    </thead>
+                </table>
+            </form></td>
+    </tr>
+</table>

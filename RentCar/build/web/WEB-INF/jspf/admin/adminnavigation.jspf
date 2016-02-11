@@ -1,0 +1,42 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="navigation">
+    <table border="0" style="margin-left: 5px; width: 100%;">
+        <tr>
+            <td style="width: 25%;">
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="gotomain" />
+                        <button type="submit"><fmt:message key="nav.main" /></button>
+                    </div>
+                </form>
+            </td>
+            <td style="width: 25%;">
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="showcars" />
+                        <button type="submit"><fmt:message key="nav.admin.car" /></button>
+                    </div>
+                </form>
+            </td>
+
+            <td style="width: 25%;">
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="showpenalty" />
+                        <button type="submit"><fmt:message key="nav.admin.penalty" /></button>
+                    </div>
+                </form>
+            </td>
+
+            <td style="width: 25%;">
+                <form id="registerForm" method="POST" action="controller">
+                    <div class="navigation">
+                        <input type="hidden" name="command" value="showorders" />
+                        <button type="submit"><fmt:message key="nav.admin.orders" /></button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</div>

@@ -1,0 +1,82 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+
+<c:if test="${not empty penaltyFindError}">
+    <fmt:message key="penalty.get.error"/>
+</c:if>
+
+<table border="0" style="margin: auto;">
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <input type="hidden" name="command" value="showpenaltybystatus" />
+                    <input type="hidden" name="penaltyStatus" value="false" />
+                    <button type="submit"><fmt:message key="button.penalty.unpaid" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+<table border="0" style="margin: auto;">
+    <tr>
+        <td>
+            <form id="registerForm" method="POST" action="controller">
+                <div class="register">
+                    <input type="hidden" name="command" value="showpenaltybystatus" />
+                    <input type="hidden" name="penaltyStatus" value="true" />
+                    <button type="submit"><fmt:message key="button.penalty.paid" /></button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<c:forEach var="penalty" items="${adminPenList}">
+    <table class="ordertable">
+        <thead>
+            <tr>
+                <th style="border-bottom: 1px solid activeborder;"><fmt:message key="penalty.id"/></th>
+    <th style="border-bottom: 1px solid activeborder;">${penalty.penaltyId}</th>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td style="width: 150px;"><b><i><fmt:message key="penalty.order"/></i></b></td>
+        <td style="border-bottom: 1px solid activeborder;">${penalty.orderId}</td>
+    </tr>
+    <tr>
+        <td><b><i><fmt:message key="penalty.message"/></i></b></td>
+        <td style="border-bottom: 1px solid activeborder;">${penalty.message}</td>
+    </tr>
+    <tr>
+        <td><b><i><fmt:message key="penalty.sum"/></i></b></td>
+        <td style="border-bottom: 1px solid activeborder;">${penalty.sum}</td>
+    </tr>
+
+</tbody>
+</table>
+<c:choose>
+    <c:when test="${penalty.isPayed==true}">
+        <table class="conttable">
+            <tr>
+                <td><b><i><fmt:message key="penalty.admin.payed"/></i></b></td>
+
+            </tr>
+        </table>
+    </c:when>
+    <c:when test="${penalty.isPayed==false}">
+        <form class="userUnBlock" action="controller" method="POST">
+            <div class="register">
+                <input type="hidden" name="command" value="needchangepenalty" />
+                <input type="hidden" name="penaltyId" value="${penalty.penaltyId}">
+                <button type="submit"><fmt:message key="button.change" /></button>
+            </div>
+        </form>
+    </c:when>
+    <c:otherwise>
+
+    </c:otherwise>
+</c:choose>
+</br>
+</c:forEach>
