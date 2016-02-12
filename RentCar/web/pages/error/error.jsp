@@ -17,18 +17,14 @@
         <form id="loginForm" action="controller" method="post">
             <input type="hidden" name="command" value="goback" />
             <div class="field">
-                <label>Failed request from:</label>
-                <div class="input">${pageContext.errorData.requestURI}</div>
+                <div class="input">$
+                    <fmt:message key="text.error" />
                 </br>
                 <label>Servlet name or type:</label>
                 <div class="input">${pageContext.errorData.servletName}</div>
                 <br/>
                 <label>Status code:</label>
                 <div class="input">${pageContext.errorData.statusCode}</div>
-                <br/>
-                <label>Exception:</label>
-                <div class="input">${pageContext.errorData.throwable}</div>
-                <br/>
             </div>
 
             <div class="submit">
