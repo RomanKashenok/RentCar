@@ -20,10 +20,6 @@
                 <div class="input">$
                     <fmt:message key="text.error" />
                 </br>
-                <label>Servlet name or type:</label>
-                <div class="input">${pageContext.errorData.servletName}</div>
-                <br/>
-                <label>Status code:</label>
                 <div class="input">${pageContext.errorData.statusCode}</div>
             </div>
 
