@@ -76,8 +76,8 @@ public class PenaltyDAO extends AbstractDAO<Penalty> {
             close(preparedStatementUpdateCar);
             close(preparedStatementUpdateOrder);
             pool.returnConnection(connection);
+            return isAdded;
         }
-        return isAdded;
     }
 
     /**
@@ -128,7 +128,7 @@ public class PenaltyDAO extends AbstractDAO<Penalty> {
      */
     @Override
     public boolean deleteEntity(long id) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     /**
@@ -222,7 +222,11 @@ public class PenaltyDAO extends AbstractDAO<Penalty> {
         } catch (SQLException ex) {
             throw new DAOException("Impossible to change Penalty status in changePenaltyStatus method", ex);
         }
-        return isStatusChanged;
+        finally{
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isStatusChanged;
+        }
     }
 
     /**
@@ -300,8 +304,11 @@ public class PenaltyDAO extends AbstractDAO<Penalty> {
             isUpdated = true;
         } catch (SQLException ex) {
             throw new DAOException("Impossible to change Penalty status in updatePenaltyById method", ex);
+        }finally{
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isUpdated;
         }
-        return isUpdated;
     }
 
 }

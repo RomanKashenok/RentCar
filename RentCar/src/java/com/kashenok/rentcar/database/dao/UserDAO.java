@@ -61,12 +61,12 @@ public class UserDAO extends AbstractDAO<User> {
 
             isAdded = true;
         } catch (SQLException ex) {
-            throw new DAOException("Impossible to add new user: ", ex);
+            throw new DAOException("Impossible to add new user in addEntity method UserDAO class: ", ex);
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isAdded;
         }
-        return isAdded;
     }
 
     /**
@@ -217,21 +217,20 @@ public class UserDAO extends AbstractDAO<User> {
         PreparedStatement preparedStatement = null;
         boolean isUpdated = false;
         double sumToUpdate = userBalance - orderCoast;
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(UPDATE_BALANCE);
-                preparedStatement.setDouble(1, sumToUpdate);
-                preparedStatement.setInt(2, userId);
-                preparedStatement.executeUpdate();
-                isUpdated = true;
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.updateBalance", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
-            }
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_BALANCE);
+            preparedStatement.setDouble(1, sumToUpdate);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.executeUpdate();
+            isUpdated = true;
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.updateBalance", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isUpdated;
+
         }
-        return isUpdated;
     }
 
     /**
@@ -257,7 +256,6 @@ public class UserDAO extends AbstractDAO<User> {
             user.setRole(role);
         }
         return user;
-
     }
 
     /**
@@ -274,22 +272,21 @@ public class UserDAO extends AbstractDAO<User> {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         boolean isCorrect = false;
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(FIND_LOGIN);
-                preparedStatement.setString(1, login);
-                resultSet = preparedStatement.executeQuery();
-                if (!resultSet.next()) {
-                    isCorrect = true;
-                }
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.checkLogin", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
+        try {
+            preparedStatement = connection.prepareStatement(FIND_LOGIN);
+            preparedStatement.setString(1, login);
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                isCorrect = true;
             }
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.checkLogin", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isCorrect;
+
         }
-        return isCorrect;
     }
 
     /**
@@ -306,22 +303,21 @@ public class UserDAO extends AbstractDAO<User> {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         boolean isCorrect = false;
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(FIND_EMAIL);
-                preparedStatement.setString(1, email);
-                resultSet = preparedStatement.executeQuery();
-                if (!resultSet.next()) {
-                    isCorrect = true;
-                }
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.checkEmail", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
+        try {
+            preparedStatement = connection.prepareStatement(FIND_EMAIL);
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                isCorrect = true;
             }
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.checkEmail", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isCorrect;
+
         }
-        return isCorrect;
     }
 
     /**
@@ -338,22 +334,21 @@ public class UserDAO extends AbstractDAO<User> {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         boolean isCorrect = false;
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(FIND_PASSPORT);
-                preparedStatement.setString(1, passportNumber);
-                resultSet = preparedStatement.executeQuery();
-                if (!resultSet.next()) {
-                    isCorrect = true;
-                }
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.checkPassport", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
+        try {
+            preparedStatement = connection.prepareStatement(FIND_PASSPORT);
+            preparedStatement.setString(1, passportNumber);
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                isCorrect = true;
             }
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.checkPassport", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isCorrect;
         }
-        return isCorrect;
+
     }
 
     /**
@@ -373,21 +368,19 @@ public class UserDAO extends AbstractDAO<User> {
         PreparedStatement preparedStatement = null;
         boolean isRefilled = false;
         double sumToRefill = refillSum + currentBalance;
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(UPDATE_BALANCE);
-                preparedStatement.setDouble(1, sumToRefill);
-                preparedStatement.setInt(2, userId);
-                preparedStatement.executeUpdate();
-                isRefilled = true;
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.checkPassport", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
-            }
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_BALANCE);
+            preparedStatement.setDouble(1, sumToRefill);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.executeUpdate();
+            isRefilled = true;
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.checkPassport", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isRefilled;
         }
-        return isRefilled;
     }
 
     /**
@@ -405,20 +398,18 @@ public class UserDAO extends AbstractDAO<User> {
         double userBalance = currentBalance;
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(FIND_BALANCE);
-                preparedStatement.setInt(1, userId);
-                resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    userBalance = resultSet.getDouble(1);
-                }
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.findUserBalance", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
+        try {
+            preparedStatement = connection.prepareStatement(FIND_BALANCE);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                userBalance = resultSet.getDouble(1);
             }
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.findUserBalance", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
         }
         return userBalance;
     }
@@ -462,23 +453,22 @@ public class UserDAO extends AbstractDAO<User> {
         Connection connection = pool.getConnection();
         PreparedStatement preparedStatement = null;
         boolean isUpdated = false;
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(UPDATE_USER_PROFILE);
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, firstName);
-                preparedStatement.setString(3, lastName);
-                preparedStatement.setInt(4, userId);
-                preparedStatement.executeUpdate();
-                isUpdated = true;
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.checkPassport", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
-            }
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_USER_PROFILE);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setInt(4, userId);
+            preparedStatement.executeUpdate();
+            isUpdated = true;
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.checkPassport", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isUpdated;
+
         }
-        return isUpdated;
     }
 
     /**
@@ -496,22 +486,20 @@ public class UserDAO extends AbstractDAO<User> {
         Connection connection = pool.getConnection();
         PreparedStatement preparedStatement = null;
 
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(BLOCK_USER);
-                preparedStatement.setString(1, action);
-                preparedStatement.setInt(2, userId);
-                System.out.println("preparedStatement: " + preparedStatement);
-                preparedStatement.executeUpdate();
-                isDone = true;
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method UserDAO.checkPassport", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
-            }
+        try {
+            preparedStatement = connection.prepareStatement(BLOCK_USER);
+            preparedStatement.setString(1, action);
+            preparedStatement.setInt(2, userId);
+            System.out.println("preparedStatement: " + preparedStatement);
+            preparedStatement.executeUpdate();
+            isDone = true;
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method UserDAO.checkPassport", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isDone;
         }
-        return isDone;
     }
 
 }

@@ -75,8 +75,8 @@ public class CarDAO extends AbstractDAO<Car> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isSaved;
         }
-        return isSaved;
     }
 
     /**
@@ -138,7 +138,6 @@ public class CarDAO extends AbstractDAO<Car> {
         ResultSet resultSet = null;
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
-
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(FIND_ALL_CARS);
@@ -233,6 +232,7 @@ public class CarDAO extends AbstractDAO<Car> {
         while (statusSet.next()) {
             status = statusSet.getString(1);
         }
+        close(statusStatement);
         return status;
     }
 
@@ -261,8 +261,8 @@ public class CarDAO extends AbstractDAO<Car> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isConfirmed;
         }
-        return isConfirmed;
     }
 
     /**
@@ -300,8 +300,8 @@ public class CarDAO extends AbstractDAO<Car> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isUpdated;
         }
-        return isUpdated;
     }
 
     /**
@@ -318,22 +318,20 @@ public class CarDAO extends AbstractDAO<Car> {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         boolean isCorrect = false;
-        if (connection != null) {
-            try {
-                preparedStatement = connection.prepareStatement(FIND_VIN);
-                preparedStatement.setString(1, vin);
-                resultSet = preparedStatement.executeQuery();
-                if (!resultSet.next()) {
-                    isCorrect = true;
-                }
-            } catch (SQLException e) {
-                throw new DAOException("Exception in method CArDAO.checkVin", e);
-            } finally {
-                close(preparedStatement);
-                pool.returnConnection(connection);
+        try {
+            preparedStatement = connection.prepareStatement(FIND_VIN);
+            preparedStatement.setString(1, vin);
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                isCorrect = true;
             }
+        } catch (SQLException e) {
+            throw new DAOException("Exception in method CArDAO.checkVin", e);
+        } finally {
+            close(preparedStatement);
+            pool.returnConnection(connection);
+            return isCorrect;
         }
-        return isCorrect;
     }
 
 }

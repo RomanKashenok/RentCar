@@ -18,7 +18,6 @@ import org.apache.log4j.Logger;
  */
 public class ConnectionPool {
 
-    //Зачистка пула!!!!
     public static final Logger LOG = Logger.getLogger(ConnectionPool.class);
     private BlockingQueue<Connection> pool;
     private static ConnectionPool instance;

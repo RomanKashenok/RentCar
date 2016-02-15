@@ -16,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -116,7 +115,7 @@ public class OrderDAO extends AbstractDAO<Order> {
      */
     @Override
     public boolean deleteEntity(long id) throws DAOException {
-        boolean isDeleted;
+        boolean isDeleted = false;
         PreparedStatement preparedStatement = null;
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -130,9 +129,8 @@ public class OrderDAO extends AbstractDAO<Order> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isDeleted;
         }
-
-        return isDeleted;
     }
 
     /**
@@ -293,6 +291,7 @@ public class OrderDAO extends AbstractDAO<Order> {
             String carStatus = findCarStatus(availability, connection);
             car.setcarStatus(CarStatus.valueOf(carStatus.toUpperCase()));
         }
+        close(carStatement);
         return car;
     }
 
@@ -313,6 +312,7 @@ public class OrderDAO extends AbstractDAO<Order> {
         while (statusSet.next()) {
             status = statusSet.getString(1);
         }
+        close(statusStatement);
         return status;
     }
 
@@ -345,6 +345,7 @@ public class OrderDAO extends AbstractDAO<Order> {
             user.setBalance(userSet.getDouble(9));
 
         }
+        close(userStatement);
         return user;
     }
 
@@ -365,6 +366,7 @@ public class OrderDAO extends AbstractDAO<Order> {
         while (roleSet.next()) {
             userRole = UserRole.valueOf(roleSet.getString(1).toUpperCase());
         }
+        close(roleStatement);
         return userRole;
     }
 
@@ -385,6 +387,7 @@ public class OrderDAO extends AbstractDAO<Order> {
         while (statusSet.next()) {
             orderStatus = OrderStatus.valueOf(statusSet.getString(1).toUpperCase());
         }
+        close(orderStatusStatement);
         return orderStatus;
     }
 
@@ -479,8 +482,8 @@ public class OrderDAO extends AbstractDAO<Order> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isAdded;
         }
-        return isAdded;
     }
 
     /**
@@ -513,8 +516,8 @@ public class OrderDAO extends AbstractDAO<Order> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isUpdated;
         }
-        return isUpdated;
     }
 
     /**
@@ -543,8 +546,8 @@ public class OrderDAO extends AbstractDAO<Order> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isConfirmed;
         }
-        return isConfirmed;
     }
 
     /**
@@ -573,8 +576,8 @@ public class OrderDAO extends AbstractDAO<Order> {
         } finally {
             close(preparedStatement);
             pool.returnConnection(connection);
+            return isCanceled;
         }
-        return isCanceled;
     }
 
     /**
@@ -610,7 +613,7 @@ public class OrderDAO extends AbstractDAO<Order> {
     }
 
     /**
-     * The method findOrderedDatesList. Look for all RentTermHolder objects 
+     * The method findOrderedDatesList. Look for all RentTermHolder objects
      *
      * @param carId Car id
      * @return List of all RentTermHolder objects which where found
