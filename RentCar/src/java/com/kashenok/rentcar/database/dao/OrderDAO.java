@@ -41,10 +41,10 @@ public class OrderDAO extends AbstractDAO<Order> {
     public static final String ORDER_ID = "orderId";
 
     public static final String ADD_ORDER = "INSERT INTO rentcar2.order (id_car, id_user, orderDate, returnDate, coast) VALUES(?, ?, ?, ?, ?)";
-    public static final String FIND_ALL_ORDERS = "SELECT id_order, id_car, id_user, orderDate, returnDate, status, coast, cancelMessage FROM rentcar2.order";
-    public static final String FIND_ORDER_BY_ID = "SELECT id_order, id_car, id_user, orderDate, returnDate, status, coast, cancelMessage FROM rentcar2.order WHERE id_order=?";
-    public static final String FIND_ORDERS_BY_STATUS = "SELECT id_order, id_car, id_user, orderDate, returnDate, status, coast, cancelMessage FROM rentcar2.order WHERE status=(SELECT id_status FROM order_status WHERE orderStatus = ?) ORDER BY id_order";
-    public static final String FIND_ORDERS_BY_USER_ID = "SELECT id_order, id_car, id_user, orderDate, returnDate, status, coast, cancelMessage FROM rentcar2.order WHERE id_user=?  ORDER BY id_order";
+    public static final String FIND_ALL_ORDERS = "SELECT o.id_order, o.id_car, o.id_user, o.orderDate, o.returnDate, os.orderStatus, o.coast, o.cancelMessage FROM rentcar2.order AS o INNER JOIN order_status AS os ON o.status=os.id_status;";
+    public static final String FIND_ORDER_BY_ID = "SELECT o.id_order, o.id_car, o.id_user, o.orderDate, o.returnDate, os.orderStatus, o.coast, o.cancelMessage FROM rentcar2.order AS o INNER JOIN order_status AS os ON o.status=os.id_status WHERE o.id_order=?";
+    public static final String FIND_ORDERS_BY_STATUS = "SELECT o.id_order, o.id_car, o.id_user, o.orderDate, o.returnDate, os.orderStatus, o.coast, o.cancelMessage FROM rentcar2.order AS o INNER JOIN order_status AS os ON o.status=os.id_status WHERE os.orderStatus=? ORDER BY id_order";
+    public static final String FIND_ORDERS_BY_USER_ID = "SELECT o.id_order, o.id_car, o.id_user, o.orderDate, o.returnDate, os.orderStatus, o.coast, o.cancelMessage FROM rentcar2.order AS o INNER JOIN order_status AS os ON o.status=os.id_status WHERE o.id_user=? ORDER BY id_order";
 
     public static final String FIND_CAR_BY_ID = "SELECT id_car, manufacturer, model, vin, colour, issueDate, transmission, engine_capacity, fuelConsumpting, engineType, price, carStatus FROM car WHERE id_car=?";
     public static final String FIND_CAR_STATUS = "SELECT carStatus FROM car_status WHERE id_carStatus = ?";
@@ -53,7 +53,7 @@ public class OrderDAO extends AbstractDAO<Order> {
     public static final String FIND_ORDER_STATUS_BY_ID = "SELECT orderStatus FROM order_status WHERE id_status=?";
     public static final String FIND_ORDERS_CAR_CONFIRMED = "SELECT orderDate, returnDate FROM rentcar2.order WHERE status =(SELECT id_status FROM order_status WHERE orderStatus='confirmed') AND id_car=? ORDER BY orderDate";
 
-    public static final String FIND_ORDERS_BY_USER_ID_AND_STATUS = "SELECT id_order, id_car, id_user, orderDate, returnDate, status, coast, cancelMessage FROM rentcar2.order WHERE id_user=? AND  status = (SELECT id_status from order_status WHERE orderStatus = ?)";
+    public static final String FIND_ORDERS_BY_USER_ID_AND_STATUS = "SELECT o.id_order, o.id_car, o.id_user, o.orderDate, o.returnDate, os.orderStatus, o.coast, o.cancelMessage FROM rentcar2.order AS o INNER JOIN order_status AS os ON o.status=os.id_status WHERE o.id_user = ? AND os.orderStatus=?";
     public static final String CHANGE_STATUS_AND_COAST = "UPDATE rentcar2.order SET status=?, coast=? WHERE  id_order=?";
     public static final String REMOVE_ORDER_BY_ID = "DELETE FROM rentcar2.order WHERE id_order = ?";
     public static final String UPDATE_ORDER = "UPDATE rentcar2.order SET id_car=?, id_user=?, orderDate=?, returnDate=?, coast=? WHERE id_order=?";
@@ -252,8 +252,7 @@ public class OrderDAO extends AbstractDAO<Order> {
         order.setDateFrom(resultSet.getDate(4));
         order.setDateTo(resultSet.getDate(5));
 
-        OrderStatus orderStatus = createOrderStatus(resultSet.getInt(6), connection);
-        order.setOrderStatus(orderStatus);
+        order.setOrderStatus(OrderStatus.valueOf(resultSet.getString(6).toUpperCase()));
 
         order.setCoast(resultSet.getDouble(7));
         order.setCancelMessage(resultSet.getString(8));
@@ -368,27 +367,6 @@ public class OrderDAO extends AbstractDAO<Order> {
         }
         close(roleStatement);
         return userRole;
-    }
-
-    /**
-     * The method createOrderStatus. Looking OrderStatus
-     *
-     * @param orderStatusId is the id_status integer representation in database
-     * @param connection is the Connection object
-     * @return String value of CarStatus
-     *
-     * @throws DAOException
-     */
-    private OrderStatus createOrderStatus(int orderStatusId, Connection connection) throws SQLException {
-        OrderStatus orderStatus = OrderStatus.UNCONFIRMED;
-        PreparedStatement orderStatusStatement = connection.prepareStatement(FIND_ORDER_STATUS_BY_ID);
-        orderStatusStatement.setInt(1, orderStatusId);
-        ResultSet statusSet = orderStatusStatement.executeQuery();
-        while (statusSet.next()) {
-            orderStatus = OrderStatus.valueOf(statusSet.getString(1).toUpperCase());
-        }
-        close(orderStatusStatement);
-        return orderStatus;
     }
 
     /**

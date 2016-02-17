@@ -35,7 +35,8 @@ public class CarDAO extends AbstractDAO<Car> {
     public static final String ADD_CAR = "INSERT INTO car (manufacturer, model, vin, colour, issueDate, transmission, engine_capacity, fuelConsumpting, engineType, price, carStatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, (SELECT id_carStatus FROM car_status WHERE carStatus=?))";
     public static final String FIND_ALL_CARS = "SELECT id_car, manufacturer, model, vin, colour, issueDate, transmission, engine_capacity, fuelConsumpting, engineType, price, carStatus FROM car";
     public static final String FIND_CAR_BY_ID = "SELECT id_car, manufacturer, model, vin, colour, issueDate, transmission, engine_capacity, fuelConsumpting, engineType, price, carStatus FROM car WHERE id_car=?";
-    public static final String FIND_CARS_BY_STATUS = "SELECT id_car, manufacturer, model, vin, colour, issueDate, transmission, engine_capacity, fuelConsumpting, engineType, price, carStatus FROM car WHERE carStatus = (SELECT id_carStatus FROM car_status WHERE carStatus=?)";
+//    public static final String FIND_CARS_BY_STATUS = "SELECT id_car, manufacturer, model, vin, colour, issueDate, transmission, engine_capacity, fuelConsumpting, engineType, price, carStatus FROM car WHERE carStatus = (SELECT id_carStatus FROM car_status WHERE carStatus=?)";
+    public static final String FIND_CARS_BY_STATUS = "SELECT c.id_car, c.manufacturer, c.model, c.vin, c.colour, c.issueDate, c.transmission, c.engine_capacity, c.fuelConsumpting, c.engineType, c.price, cs.carStatus FROM car AS c INNER JOIN car_status AS cs ON c.carStatus=cs.id_carStatus WHERE cs.carStatus=?";
     public static final String FIND_CAR_STATUS = "SELECT carStatus FROM car_status WHERE id_carStatus = ?";
     public static final String CHANGE_STATUS = "UPDATE car SET carStatus=(SELECT id_carStatus FROM car_status WHERE carStatus=?) WHERE id_car=?";
     public static final String UPDATE_CAR = "UPDATE car SET manufacturer=?, model=?, vin=?, colour=?, issueDate=?, transmission=?, engine_capacity=?, fuelConsumpting=?, engineType=?, price=?, carStatus=(SELECT id_carStatus from car_status WHERE carStatus=?) WHERE id_car=?";
@@ -208,9 +209,7 @@ public class CarDAO extends AbstractDAO<Car> {
         car.setFuelConsumpting(carSet.getInt(9));
         car.setEngineType(carSet.getString(10));
         car.setPrice(carSet.getDouble(11));
-        int availability = carSet.getInt(12);
-        String carStatus = findCarStatus(availability, connection);
-        car.setcarStatus(CarStatus.valueOf(carStatus.toUpperCase()));
+        car.setcarStatus(CarStatus.valueOf(carSet.getString(12).toUpperCase()));
         return car;
     }
 
